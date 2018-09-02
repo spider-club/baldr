@@ -1,3 +1,5 @@
 rootProject.name = 'baldr'
 
 include ':spiders'
+include ':engine'
+
