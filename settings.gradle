@@ -3,4 +3,4 @@ rootProject.name = 'baldr'
 include ':spiders'
 include ':engine'
 include ':settings'
-
+include ':main'
