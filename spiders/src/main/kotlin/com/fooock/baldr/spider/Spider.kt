@@ -3,7 +3,7 @@ package com.fooock.baldr.spider
 /**
  * Base class for all spiders
  */
-abstract class BaseSpider(val name: String) {
+abstract class Spider(val name: String) {
     /**
      * Initial url's for this Spider to be crawled
      */

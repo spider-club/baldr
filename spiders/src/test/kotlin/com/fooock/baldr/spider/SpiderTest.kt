@@ -7,7 +7,7 @@ import org.junit.Test
 /**
  *
  */
-class BaseSpiderTest {
+class SpiderTest {
     private val fakeSpider = FakeSpider()
 
     @Test
@@ -20,7 +20,7 @@ class BaseSpiderTest {
     fun testEmptyStartUrls() = assertArrayEquals(emptyArray(), fakeSpider.startUrls)
 }
 
-class FakeSpider : BaseSpider("fake-spider") {
+class FakeSpider : Spider("fake-spider") {
     override val startUrls: Array<String> = emptyArray()
     override val allowedDomains: Array<String> = emptyArray()
 }

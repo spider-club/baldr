@@ -1,6 +1,13 @@
 package com.fooock.baldr.engine
 
+import com.fooock.baldr.engine.service.SpiderService
+
 /**
  *
  */
-class Engine
+interface Engine {
+    /**
+     *
+     */
+    fun spiderService(): SpiderService
+}
