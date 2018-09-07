@@ -5,3 +5,5 @@ include ':engine'
 include ':settings'
 include ':main'
 include ':example'
+include 'logging'
+

@@ -12,8 +12,8 @@ compileTestKotlin {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "io.github.microutils:kotlin-logging:1.6.10"
+    compile "org.slf4j:slf4j-simple:1.7.25"
 
-    compile project(':logging')
 
-    testCompile "junit:junit:4.12"
 }
