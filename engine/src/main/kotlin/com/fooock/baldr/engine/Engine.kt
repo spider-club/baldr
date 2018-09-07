@@ -1,13 +1,16 @@
 package com.fooock.baldr.engine
 
 import com.fooock.baldr.engine.service.SpiderService
+import com.fooock.baldr.settings.SettingsManager
 
 /**
  *
  */
-interface Engine {
+class Engine(val settings: SettingsManager) {
     /**
      *
      */
-    fun spiderService(): SpiderService
+    fun spiderService(): SpiderService {
+        return SpiderService()
+    }
 }
