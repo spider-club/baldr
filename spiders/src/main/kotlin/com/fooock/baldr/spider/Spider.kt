@@ -13,4 +13,8 @@ abstract class Spider(val name: String) {
      * Array of allowed domains to be crawled by this spider.
      */
     open val allowedDomains: Array<String> = emptyArray()
+
+    override fun toString(): String {
+        return name
+    }
 }

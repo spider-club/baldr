@@ -12,6 +12,7 @@ compileTestKotlin {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
     compile project(':spiders')
     compile project(':settings')
 

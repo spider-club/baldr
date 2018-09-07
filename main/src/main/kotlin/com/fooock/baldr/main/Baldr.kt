@@ -7,10 +7,10 @@ import com.fooock.baldr.spider.Spider
 /**
  * Main entry point
  */
-class Baldr(settings: SettingsManager = SettingsManager()) {
+class Baldr(settings: SettingsManager = SettingsManager(), spiders: Array<Spider>) {
     private val engine = Engine(settings)
 
-    fun addSpider(spider: Spider) {
-        engine.spiderService().register(spider)
+    init {
+        spiders.forEach { engine.spiderService().register(it) }
     }
 }

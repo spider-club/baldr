@@ -7,8 +7,7 @@ import com.fooock.baldr.spider.Spider
  * Example entry point
  */
 fun main(args: Array<String>) {
-    val baldr = Baldr()
-    baldr.addSpider(ExampleSpider())
+    Baldr(spiders = arrayOf(ExampleSpider()))
 }
 
 /**
