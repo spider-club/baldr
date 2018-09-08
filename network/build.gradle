@@ -12,6 +12,9 @@ compileTestKotlin {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "com.squareup.okhttp3:okhttp:3.11.0"
+
+    compile project(':logging')
 
     testCompile "junit:junit:4.12"
 }
