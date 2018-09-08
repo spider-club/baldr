@@ -6,4 +6,4 @@ include ':settings'
 include ':main'
 include ':example'
 include 'logging'
-
+include ':network'
