@@ -12,5 +12,8 @@ compileTestKotlin {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    compile project(':network')
+
     testCompile "junit:junit:4.12"
 }

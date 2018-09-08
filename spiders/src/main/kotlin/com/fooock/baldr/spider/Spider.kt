@@ -1,5 +1,7 @@
 package com.fooock.baldr.spider
 
+import com.fooock.baldr.network.Response
+
 /**
  * Base class for all spiders
  */
@@ -17,4 +19,6 @@ abstract class Spider(val name: String) {
     override fun toString(): String {
         return name
     }
+
+    abstract fun parse(response: Response): Result
 }

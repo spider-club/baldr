@@ -1,6 +1,10 @@
 package com.fooock.baldr.example
 
 import com.fooock.baldr.main.Baldr
+import com.fooock.baldr.network.Request
+import com.fooock.baldr.network.Response
+import com.fooock.baldr.spider.Item
+import com.fooock.baldr.spider.Result
 import com.fooock.baldr.spider.Spider
 
 /**
@@ -17,4 +21,7 @@ class ExampleSpider : Spider("example") {
     override val startUrls: Array<String>
         get() = arrayOf("http://example.com")
 
+    override fun parse(response: Response): Result {
+        return Result(request = Request(), item = Item())
+    }
 }
