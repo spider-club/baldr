@@ -25,7 +25,5 @@ class FakeSpider : Spider("fake-spider") {
     override val startUrls: Array<String> = emptyArray()
     override val allowedDomains: Array<String> = emptyArray()
 
-    override fun parse(response: Response): Result {
-        return Result()
-    }
+    override fun parse(response: Response) {}
 }

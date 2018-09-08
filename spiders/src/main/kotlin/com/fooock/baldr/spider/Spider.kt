@@ -21,7 +21,7 @@ abstract class Spider(val name: String) {
         return name
     }
 
-    abstract fun parse(response: Response): Result
+    abstract fun parse(response: Response)
 
     /**
      *
