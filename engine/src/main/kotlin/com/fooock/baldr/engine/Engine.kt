@@ -3,6 +3,7 @@ package com.fooock.baldr.engine
 import com.fooock.baldr.engine.service.PipelineService
 import com.fooock.baldr.engine.service.SpiderService
 import com.fooock.baldr.network.Downloader
+import com.fooock.baldr.network.Request
 import com.fooock.baldr.scheduler.Scheduler
 import com.fooock.baldr.settings.SettingsManager
 import mu.KotlinLogging
@@ -10,13 +11,13 @@ import mu.KotlinLogging
 /**
  *
  */
-class Engine(val settings: SettingsManager) {
+class Engine(val settings: SettingsManager) : EngineProcessor {
     private val logger = KotlinLogging.logger {}
 
     private val downloader = Downloader()
     private val scheduler = Scheduler()
 
-    private val spiderService = SpiderService()
+    private val spiderService = SpiderService(this)
     private val pipelineService = PipelineService()
 
     init {
@@ -36,4 +37,9 @@ class Engine(val settings: SettingsManager) {
      * and retrieve the number of registered pipelines.
      */
     fun pipelineService(): PipelineService = pipelineService
+
+    override fun process(request: Request) {
+        logger.info { "Engine receives $request to schedule" }
+        scheduler.add(request)
+    }
 }

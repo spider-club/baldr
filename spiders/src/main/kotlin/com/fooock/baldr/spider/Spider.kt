@@ -1,5 +1,6 @@
 package com.fooock.baldr.spider
 
+import com.fooock.baldr.network.Request
 import com.fooock.baldr.network.Response
 
 /**
@@ -21,4 +22,11 @@ abstract class Spider(val name: String) {
     }
 
     abstract fun parse(response: Response): Result
+
+    /**
+     *
+     */
+    fun process(): Array<Request> {
+        return emptyArray()
+    }
 }
