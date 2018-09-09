@@ -19,6 +19,6 @@ class ExampleSpider : Spider("example") {
         get() = arrayOf("http://example.com", "http://example1.com", "http://example2.com", "http://example3.com", "http://example4.com")
 
     override fun parse(response: Response) {
-
+        response.links().forEach { yield(it) }
     }
 }
