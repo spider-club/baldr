@@ -43,10 +43,10 @@ class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcesso
 
     override fun process(request: Request, spider: Spider) {
         logger.info { "Engine receives $request to schedule from spider '$spider'" }
-        scheduler.add(request)
+        scheduler.add(request, spider)
     }
 
-    override fun requestScheduled(request: Request) {
+    override fun requestScheduled(request: Request, spider: Spider) {
         logger.info { "Engine receives request ($request) to download" }
         downloader.get(request)
     }

@@ -15,6 +15,7 @@ dependencies {
 
     compile project(':logging')
     compile project(':network')
+    compile project(':spiders')
 
     testCompile "junit:junit:4.12"
 }
