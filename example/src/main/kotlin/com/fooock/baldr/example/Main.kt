@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
  */
 class ExampleSpider : Spider("example") {
     override val startUrls: Array<String>
-        get() = arrayOf("http://example.com")
+        get() = arrayOf("http://example.com", "http://example1.com", "http://example2.com", "http://example3.com", "http://example4.com")
 
     override fun parse(response: Response) {
 

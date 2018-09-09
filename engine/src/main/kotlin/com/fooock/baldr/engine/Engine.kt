@@ -3,7 +3,9 @@ package com.fooock.baldr.engine
 import com.fooock.baldr.engine.service.PipelineService
 import com.fooock.baldr.engine.service.SpiderService
 import com.fooock.baldr.network.Downloader
+import com.fooock.baldr.network.DownloaderProcessor
 import com.fooock.baldr.network.Request
+import com.fooock.baldr.network.Response
 import com.fooock.baldr.scheduler.Scheduler
 import com.fooock.baldr.scheduler.SchedulerProcessor
 import com.fooock.baldr.settings.SettingsManager
@@ -14,10 +16,10 @@ import mu.KotlinLogging
 /**
  *
  */
-class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcessor {
+class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcessor, DownloaderProcessor {
     private val logger = KotlinLogging.logger {}
 
-    private val downloader = Downloader()
+    private val downloader = Downloader(this)
     private val scheduler = Scheduler(this)
 
     private val spiderService = SpiderService(this)
@@ -48,6 +50,23 @@ class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcesso
 
     override fun requestScheduled(request: Request, spider: Spider) {
         logger.info { "Engine receives request ($request) to download" }
-        downloader.get(request)
+        downloader.get(request, spider)
+    }
+
+    override fun onInvalidResponse(request: Request, spider: Spider) {
+        logger.warn { "Invalid response for $request (spider=$spider)" }
+    }
+
+    override fun onUrlNotFound(request: Request, spider: Spider) {
+        logger.warn { "Url $request not found (spider=$spider)" }
+    }
+
+    override fun onServerError(request: Request, spider: Spider) {
+        logger.warn { "Server error for request $request (spider=$spider)" }
+    }
+
+    override fun onSuccessResponse(request: Request, response: Response, spider: Spider) {
+        logger.info { "Success response for $request (spider=$spider)" }
+        spider.parse(response)
     }
 }
