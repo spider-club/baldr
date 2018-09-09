@@ -21,4 +21,8 @@ class PipelineService : Service<Pipeline> {
     override fun size(): Int {
         return 0
     }
+
+    override fun get(id: String): Pipeline? {
+        return null
+    }
 }

@@ -3,7 +3,7 @@ package com.fooock.baldr.engine
 /**
  * Base class for all services
  */
-interface Service<in T> {
+interface Service<T> {
     /**
      *
      */
@@ -18,4 +18,9 @@ interface Service<in T> {
      *
      */
     fun size(): Int
+
+    /**
+     *
+     */
+    fun get(id: String): T?
 }

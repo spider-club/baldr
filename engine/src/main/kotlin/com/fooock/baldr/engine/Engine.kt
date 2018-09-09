@@ -67,6 +67,6 @@ class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcesso
 
     override fun onSuccessResponse(request: Request, response: Response, spiderId: String) {
         logger.info { "Success response for $request (spider=$spiderId)" }
-        //spider.parse(response)
+        spiderService.get(spiderId)?.parse(response)
     }
 }

@@ -29,4 +29,8 @@ class SpiderService(private val spiderProcessor: SpiderProcessor) : Service<Spid
     override fun size(): Int {
         return spiders.size
     }
+
+    override fun get(id: String): Spider? {
+        return spiders[id]
+    }
 }
