@@ -5,17 +5,18 @@ import com.fooock.baldr.engine.service.SpiderService
 import com.fooock.baldr.network.Downloader
 import com.fooock.baldr.network.Request
 import com.fooock.baldr.scheduler.Scheduler
+import com.fooock.baldr.scheduler.SchedulerProcessor
 import com.fooock.baldr.settings.SettingsManager
 import mu.KotlinLogging
 
 /**
  *
  */
-class Engine(val settings: SettingsManager) : EngineProcessor {
+class Engine(val settings: SettingsManager) : EngineProcessor, SchedulerProcessor {
     private val logger = KotlinLogging.logger {}
 
     private val downloader = Downloader()
-    private val scheduler = Scheduler()
+    private val scheduler = Scheduler(this)
 
     private val spiderService = SpiderService(this)
     private val pipelineService = PipelineService()
@@ -41,5 +42,10 @@ class Engine(val settings: SettingsManager) : EngineProcessor {
     override fun process(request: Request) {
         logger.info { "Engine receives $request to schedule" }
         scheduler.add(request)
+    }
+
+    override fun requestScheduled(request: Request) {
+        logger.info { "Engine receives request ($request) to download" }
+        downloader.get(request)
     }
 }

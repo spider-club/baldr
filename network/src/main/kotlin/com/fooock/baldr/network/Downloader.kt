@@ -6,9 +6,12 @@ import mu.KotlinLogging
  *
  */
 class Downloader {
-    val logger = KotlinLogging.logger { }
+    private val logger = KotlinLogging.logger { }
 
-    init {
-        logger.info { "Downloader initialized" }
+    /**
+     *
+     */
+    fun get(request: Request) {
+        logger.info { "Downloading $request" }
     }
 }
