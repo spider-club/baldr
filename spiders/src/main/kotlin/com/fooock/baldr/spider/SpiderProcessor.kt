@@ -6,5 +6,8 @@ import com.fooock.baldr.network.Request
  *
  */
 interface SpiderProcessor {
-    fun process(request: Request)
+    /**
+     *
+     */
+    fun process(request: Request, spider: Spider)
 }

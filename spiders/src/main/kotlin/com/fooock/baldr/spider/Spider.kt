@@ -21,7 +21,7 @@ abstract class Spider(val name: String) {
      */
     open val allowedDomains: Array<String> = emptyArray()
 
-    override fun toString(): String = name
+    override fun toString(): String = "id=[$id], name=$name"
 
     /**
      *
@@ -32,7 +32,7 @@ abstract class Spider(val name: String) {
      *
      */
     protected fun yield(request: Request? = null, item: Item? = null) {
-        if (request != null) spiderProcessor?.process(request)
+        if (request != null) spiderProcessor?.process(request, this)
     }
 
     /**
