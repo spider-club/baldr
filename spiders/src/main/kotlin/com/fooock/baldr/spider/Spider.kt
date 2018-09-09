@@ -2,11 +2,13 @@ package com.fooock.baldr.spider
 
 import com.fooock.baldr.network.Request
 import com.fooock.baldr.network.Response
+import java.util.*
 
 /**
  * Base class for all spiders
  */
 abstract class Spider(val name: String) {
+    val id = UUID.randomUUID().toString()
     var spiderProcessor: SpiderProcessor? = null
 
     /**
