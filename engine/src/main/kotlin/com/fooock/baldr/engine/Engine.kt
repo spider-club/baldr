@@ -50,23 +50,23 @@ class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcesso
 
     override fun requestScheduled(request: Request, spider: Spider) {
         logger.info { "Engine receives request ($request) to download" }
-        downloader.get(request, spider)
+        downloader.get(request, spider.id)
     }
 
-    override fun onInvalidResponse(request: Request, spider: Spider) {
-        logger.warn { "Invalid response for $request (spider=$spider)" }
+    override fun onInvalidResponse(request: Request, spiderId: String) {
+        logger.warn { "Invalid response for $request (spider=$spiderId)" }
     }
 
-    override fun onUrlNotFound(request: Request, spider: Spider) {
-        logger.warn { "Url $request not found (spider=$spider)" }
+    override fun onUrlNotFound(request: Request, spiderId: String) {
+        logger.warn { "Url $request not found (spider=$spiderId)" }
     }
 
-    override fun onServerError(request: Request, spider: Spider) {
-        logger.warn { "Server error for request $request (spider=$spider)" }
+    override fun onServerError(request: Request, spiderId: String) {
+        logger.warn { "Server error for request $request (spider=$spiderId)" }
     }
 
-    override fun onSuccessResponse(request: Request, response: Response, spider: Spider) {
-        logger.info { "Success response for $request (spider=$spider)" }
-        spider.parse(response)
+    override fun onSuccessResponse(request: Request, response: Response, spiderId: String) {
+        logger.info { "Success response for $request (spider=$spiderId)" }
+        //spider.parse(response)
     }
 }

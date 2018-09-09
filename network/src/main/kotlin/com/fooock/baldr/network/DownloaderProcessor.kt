@@ -1,7 +1,5 @@
 package com.fooock.baldr.network
 
-import com.fooock.baldr.spider.Spider
-
 /**
  *
  */
@@ -9,20 +7,20 @@ interface DownloaderProcessor {
     /**
      *
      */
-    fun onInvalidResponse(request: Request, spider: Spider)
+    fun onInvalidResponse(request: Request, spiderId: String)
 
     /**
      *
      */
-    fun onUrlNotFound(request: Request, spider: Spider)
+    fun onUrlNotFound(request: Request, spiderId: String)
 
     /**
      *
      */
-    fun onServerError(request: Request, spider: Spider)
+    fun onServerError(request: Request, spiderId: String)
 
     /**
      *
      */
-    fun onSuccessResponse(request: Request, response: Response, spider: Spider)
+    fun onSuccessResponse(request: Request, response: Response, spiderId: String)
 }

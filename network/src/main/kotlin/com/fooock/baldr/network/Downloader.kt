@@ -1,6 +1,5 @@
 package com.fooock.baldr.network
 
-import com.fooock.baldr.spider.Spider
 import mu.KotlinLogging
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -21,8 +20,8 @@ class Downloader(private val downloaderProcessor: DownloaderProcessor) {
     /**
      *
      */
-    fun get(request: Request, spider: Spider) {
-        logger.info { "Downloading $request for $spider" }
+    fun get(request: Request, spiderId: String) {
+        logger.info { "Downloading $request for $spiderId" }
 
         val httpRequest = okhttp3.Request.Builder().url(request.toString()).build()
         val response = httpClient.newCall(httpRequest).execute()
@@ -31,23 +30,23 @@ class Downloader(private val downloaderProcessor: DownloaderProcessor) {
         logger.info { String.format("%03d: %s %s", respCode, request.toString(), respSource) }
 
         if (respCode == 404) {
-            downloaderProcessor.onUrlNotFound(request, spider)
+            downloaderProcessor.onUrlNotFound(request, spiderId)
             response.close()
             return
         }
         if (respCode == 500 || respCode == 503) {
-            downloaderProcessor.onServerError(request, spider)
+            downloaderProcessor.onServerError(request, spiderId)
             response.close()
             return
         }
         val contentType = response.header("Content-Type")
         if (contentType == null || respCode != 200) {
-            downloaderProcessor.onInvalidResponse(request, spider)
+            downloaderProcessor.onInvalidResponse(request, spiderId)
             response.close()
             return
         }
         val resp = Response(response)
-        downloaderProcessor.onSuccessResponse(request, resp, spider)
+        downloaderProcessor.onSuccessResponse(request, resp, spiderId)
         response.close()
     }
 }

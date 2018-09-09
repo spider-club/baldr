@@ -16,7 +16,6 @@ dependencies {
     compile "org.jsoup:jsoup:1.11.3"
 
     compile project(':logging')
-    compile project(':spiders')
 
     testCompile "junit:junit:4.12"
 }
