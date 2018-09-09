@@ -43,14 +43,13 @@ class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcesso
      */
     fun pipelineService(): PipelineService = pipelineService
 
-    override fun process(request: Request, spider: Spider) {
-        logger.info { "Engine receives $request to schedule from spider '$spider'" }
-        scheduler.add(request, spider)
+    override fun process(request: Array<out Request>, spider: Spider) {
+        logger.info { "Process ${request.size} request for $spider" }
+        scheduler.add(request, spider.id)
     }
 
-    override fun requestScheduled(request: Request, spider: Spider) {
-        logger.info { "Engine receives request ($request) to download" }
-        downloader.get(request, spider.id)
+    override fun requestScheduled(request: Request, spiderId: String) {
+        downloader.get(request, spiderId)
     }
 
     override fun onInvalidResponse(request: Request, spiderId: String) {
@@ -66,7 +65,14 @@ class Engine(val settings: SettingsManager) : SpiderProcessor, SchedulerProcesso
     }
 
     override fun onSuccessResponse(request: Request, response: Response, spiderId: String) {
-        logger.info { "Success response for $request (spider=$spiderId)" }
+        scheduler.downloadedUrls.incrementAndGet()
         spiderService.get(spiderId)?.parse(response)
+
+        logger.info {
+            "Queue(${scheduler.queue.size}) / " +
+                    "Unique(${scheduler.fetchedUrls.size}) / " +
+                    "Downloaded(${scheduler.downloadedUrls.get()}) / " +
+                    "Duplicated(${scheduler.duplicatedUrls.get()})"
+        }
     }
 }

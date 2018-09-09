@@ -19,6 +19,7 @@ class ExampleSpider : Spider("example") {
         get() = arrayOf("http://quotes.toscrape.com/")
 
     override fun parse(response: Response) {
-        response.links("div.tags").forEach { yield(it) }
+        //yield(*response.links("ul.pager li.next"))
+        yield(*response.links("div.tags"))
     }
 }

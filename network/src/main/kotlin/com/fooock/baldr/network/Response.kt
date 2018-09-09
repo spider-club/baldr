@@ -27,7 +27,7 @@ class Response(private val response: Response) {
         for (element in elements) {
             val href = element.attr("href")
             val link = response.request().url().resolve(href) ?: continue
-            requests.add(Request(link.url().toString()))
+            requests.add(Request(link.newBuilder().fragment(null).build().toString()))
         }
         logger.info { "Found ${requests.size} links from ${response.request().url()}" }
         return requests.toTypedArray()

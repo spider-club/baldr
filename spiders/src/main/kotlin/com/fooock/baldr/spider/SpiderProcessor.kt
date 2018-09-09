@@ -9,5 +9,5 @@ interface SpiderProcessor {
     /**
      *
      */
-    fun process(request: Request, spider: Spider)
+    fun process(request: Array<out Request>, spider: Spider)
 }

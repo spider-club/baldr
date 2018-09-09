@@ -31,8 +31,8 @@ abstract class Spider(val name: String) {
     /**
      *
      */
-    protected fun yield(request: Request? = null, item: Item? = null) {
-        if (request != null) spiderProcessor?.process(request, this)
+    protected fun yield(vararg request: Request = emptyArray(), item: Item? = null) {
+        if (!request.isEmpty()) spiderProcessor?.process(request, this)
     }
 
     /**
