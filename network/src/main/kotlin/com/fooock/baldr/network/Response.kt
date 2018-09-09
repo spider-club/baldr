@@ -12,11 +12,17 @@ class Response(private val response: Response) {
     private val logger = KotlinLogging.logger {}
 
     /**
-     *
+     * Retrieve all links from this response object
      */
     fun links(): Array<Request> {
-        val document = Jsoup.parse(response.body()?.string(), response.request()?.url().toString())
-        val elements: Elements = document.select("a[href]")
+        return links("")
+    }
+
+    /**
+     *
+     */
+    fun links(query: String): Array<Request> {
+        val elements: Elements = document().select("${query.trim()} a[href]")
         val requests: MutableList<Request> = ArrayList()
         for (element in elements) {
             val href = element.attr("href")
@@ -26,4 +32,16 @@ class Response(private val response: Response) {
         logger.info { "Found ${requests.size} links from ${response.request().url()}" }
         return requests.toTypedArray()
     }
+
+    /**
+     *
+     */
+    fun css(query: String): Elements = document().select(query)
+
+    /**
+     *
+     */
+    fun title(): String = document().title()
+
+    private fun document() = Jsoup.parse(response.body()?.string(), response.request()?.url().toString())
 }

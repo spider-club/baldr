@@ -16,9 +16,9 @@ fun main(args: Array<String>) {
  */
 class ExampleSpider : Spider("example") {
     override val startUrls: Array<String>
-        get() = arrayOf("http://example.com", "http://example1.com", "http://example2.com", "http://example3.com", "http://example4.com")
+        get() = arrayOf("http://quotes.toscrape.com/")
 
     override fun parse(response: Response) {
-        response.links().forEach { yield(it) }
+        response.links("div.tags").forEach { yield(it) }
     }
 }
