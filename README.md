@@ -4,4 +4,4 @@
 
 >This software is in early development stage
 
-Scrape and crawler framework written in Kotlin.
+Scraping and crawler framework written in Kotlin.
