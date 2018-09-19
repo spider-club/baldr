@@ -1,11 +1,1 @@
 rootProject.name = 'baldr'
-
-include ':spiders'
-include ':engine'
-include ':settings'
-include ':main'
-include ':example'
-include ':logging'
-include ':network'
-include ':scheduler'
-include ':pipeline'

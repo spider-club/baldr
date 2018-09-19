@@ -1,8 +1,10 @@
-allprojects {
-    group 'com.fooock'
-    version '0.1.0'
+group 'com.fooock'
+version '0.1.0'
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+    apply plugin: 'java'
 }
